@@ -42,14 +42,16 @@ realtype SUNRpowerI(realtype base, int exponent)
   return(prod);
 }
 
+extern double hoc_pow(double, double);
+
 realtype SUNRpowerR(realtype base, realtype exponent)
 {
   if (base <= ZERO) return(ZERO);
 
 #if defined(SUNDIALS_USE_GENERIC_MATH)
-  return((realtype) pow((double) base, (double) exponent));
+  return((realtype) hoc_pow((double) base, (double) exponent));
 #elif defined(SUNDIALS_DOUBLE_PRECISION)
-  return(pow(base, exponent));
+  return(hoc_pow(base, exponent));
 #elif defined(SUNDIALS_SINGLE_PRECISION)
   return(powf(base, exponent));
 #elif defined(SUNDIALS_EXTENDED_PRECISION)
